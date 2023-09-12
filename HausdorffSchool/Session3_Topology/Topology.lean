@@ -5,6 +5,7 @@ import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
 open Topology Filter Set Function TopologicalSpace
 open MeasureTheory
 set_option linter.unusedVariables false
+variable {X Y : Type _}
 
 namespace TopologySession
 
