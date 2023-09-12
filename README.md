@@ -39,7 +39,7 @@ If you have trouble installing Lean, you can use Lean directly in your browser u
 
 <a href='https://codespaces.new/fpvandoorn/HausdorffSchoolLean' target="_blank" rel="noreferrer noopener"><img src='https://github.com/codespaces/badge.svg' alt='Open in GitHub Codespaces' style='max-width: 100%;'></a>
 
-* Make sure the Machine type is `4-core`, and then press `Create codespace`
+* Make sure the Machine type is `4-core`, and then press `Create codespace` (this might take a few minutes).
 
 ## To use this repository with Gitpod
 
