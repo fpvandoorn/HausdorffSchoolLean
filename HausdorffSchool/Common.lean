@@ -1,5 +1,7 @@
 import Mathlib.Tactic
 
+-- don't edit this file!
+
 set_option warningAsError false
 
 namespace PiNotation
