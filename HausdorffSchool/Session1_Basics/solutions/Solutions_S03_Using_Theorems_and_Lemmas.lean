@@ -1,5 +1,5 @@
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
-import MIL.Common
+import HausdorffSchool.Common
 
 variable (a b c d e : ℝ)
 open Real
@@ -58,4 +58,3 @@ example : |a * b| ≤ (a ^ 2 + b ^ 2) / 2 := by
     apply fact1
   rw [le_div_iff h]
   apply fact2
-

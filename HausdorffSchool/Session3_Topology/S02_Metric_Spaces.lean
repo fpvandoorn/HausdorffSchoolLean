@@ -1,4 +1,4 @@
-import MIL.Common
+import HausdorffSchool.Common
 import Mathlib.Topology.Instances.Real
 import Mathlib.Analysis.NormedSpace.BanachSteinhaus
 
@@ -204,4 +204,3 @@ example [CompleteSpace X] (f : ℕ → Set X) (ho : ∀ n, IsOpen (f n)) (hd : �
   have I : ∀ n, ∀ m ≥ n, closedBall (c m) (r m) ⊆ closedBall (c n) (r n) := by sorry
   have yball : ∀ n, y ∈ closedBall (c n) (r n) := by sorry
   sorry
-

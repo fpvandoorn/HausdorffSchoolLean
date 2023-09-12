@@ -1,4 +1,4 @@
-import MIL.Common
+import HausdorffSchool.Common
 import Mathlib.Data.Real.Basic
 
 namespace C03S05
@@ -126,4 +126,3 @@ example (P : Prop) : ¬¬P → P := by
 
 example (P Q : Prop) : P → Q ↔ ¬P ∨ Q := by
   sorry
-

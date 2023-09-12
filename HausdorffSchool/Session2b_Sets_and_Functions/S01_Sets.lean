@@ -1,7 +1,7 @@
 import Mathlib.Data.Set.Lattice
 import Mathlib.Data.Nat.Prime
 import Mathlib.Data.Nat.Parity
-import MIL.Common
+import HausdorffSchool.Common
 
 section
 variable {α : Type*}
@@ -239,4 +239,3 @@ example : ⋂₀ s = ⋂ t ∈ s, t := by
   rfl
 
 end
-

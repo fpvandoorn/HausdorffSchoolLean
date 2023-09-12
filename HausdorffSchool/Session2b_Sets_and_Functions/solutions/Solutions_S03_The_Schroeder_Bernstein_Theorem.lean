@@ -1,6 +1,6 @@
 import Mathlib.Data.Set.Lattice
 import Mathlib.Data.Set.Function
-import MIL.Common
+import HausdorffSchool.Common
 
 open Set
 open Function
@@ -85,4 +85,3 @@ theorem sb_surjective (hf : Injective f) (hg : Injective g) : Surjective (sbFun 
   apply leftInverse_invFun hg
 
 end
-

@@ -1,4 +1,4 @@
-import MIL.Common
+import HausdorffSchool.Common
 import Mathlib.Data.Real.Basic
 
 namespace C03S06
@@ -128,4 +128,3 @@ theorem convergesTo_unique {s : ℕ → ℝ} {a b : ℝ}
     _ = |a - b| := by norm_num
 
   exact lt_irrefl _ this
-

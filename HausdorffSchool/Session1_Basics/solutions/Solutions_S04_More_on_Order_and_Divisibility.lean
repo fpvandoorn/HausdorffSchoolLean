@@ -1,4 +1,4 @@
-import MIL.Common
+import HausdorffSchool.Common
 import Mathlib.Data.Real.Basic
 
 namespace C02S04
@@ -114,4 +114,3 @@ example : Nat.gcd m n = Nat.gcd n m := by
     apply Nat.gcd_dvd_left
 
 end
-

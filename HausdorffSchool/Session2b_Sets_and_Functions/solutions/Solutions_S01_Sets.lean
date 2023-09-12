@@ -1,7 +1,7 @@
 import Mathlib.Data.Set.Lattice
 import Mathlib.Data.Nat.Prime
 import Mathlib.Data.Nat.Parity
-import MIL.Common
+import HausdorffSchool.Common
 
 section
 variable {α : Type*}
@@ -150,4 +150,3 @@ example : (⋃ p ∈ primes, { x | x ≤ p }) = univ := by
   use p, pge
 
 end
-

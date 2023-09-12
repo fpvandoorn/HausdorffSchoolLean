@@ -1,4 +1,4 @@
-import MIL.Common
+import HausdorffSchool.Common
 import Mathlib.Analysis.NormedSpace.BanachSteinhaus
 import Mathlib.Analysis.NormedSpace.FiniteDimension
 import Mathlib.Analysis.Calculus.Inverse
@@ -60,4 +60,3 @@ example {ι : Type*} [CompleteSpace E] {g : ι → E →L[𝕜] F} (h : ∀ x, �
 
 
 end
-

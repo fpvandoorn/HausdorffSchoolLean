@@ -131,7 +131,7 @@ def infᵢ_delab : Delab := whenPPOption Lean.getPPNotation do
     | _ => pure stx
   return stx
 
-/-- The Exists notation has similar considerations as sup/inf -/
+/-- The Exists notation has siHausdorffSchoolar considerations as sup/inf -/
 @[delab app.Exists]
 def exists_delab : Delab := whenPPOption Lean.getPPNotation do
   let #[ι, f] := (← SubExpr.getExpr).getAppArgs | failure

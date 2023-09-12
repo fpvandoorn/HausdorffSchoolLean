@@ -1,4 +1,4 @@
-import MIL.Common
+import HausdorffSchool.Common
 import Mathlib.Data.Real.Basic
 example (a b c : ℝ) : c * b * a = b * (a * c) := by
   rw [mul_comm c b]
@@ -29,4 +29,3 @@ example (a b c d : ℝ) (hyp : c = b * a - d) (hyp' : d = a * b) : c = 0 := by
   rw [hyp']
   rw [mul_comm]
   rw [sub_self]
-

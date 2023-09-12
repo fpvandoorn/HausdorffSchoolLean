@@ -1,6 +1,6 @@
 import Mathlib.Algebra.Ring.Defs
 import Mathlib.Data.Real.Basic
-import MIL.Common
+import HausdorffSchool.Common
 
 section
 variable (R : Type*) [Ring R]
@@ -143,4 +143,3 @@ theorem mul_inv_rev (a b : G) : (a * b)⁻¹ = b⁻¹ * a⁻¹ := by
 end MyGroup
 
 end
-

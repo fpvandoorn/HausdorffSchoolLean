@@ -1,4 +1,4 @@
-import MIL.Common
+import HausdorffSchool.Common
 import Mathlib.Topology.MetricSpace.Basic
 
 section
@@ -131,4 +131,3 @@ example (x y : X) : 0 ≤ dist x y :=by
   linarith [dist_comm x y]
 
 end
-

@@ -1,4 +1,4 @@
-import MIL.Common
+import HausdorffSchool.Common
 import Mathlib.Topology.Instances.Real
 import Mathlib.Analysis.NormedSpace.BanachSteinhaus
 
@@ -368,5 +368,3 @@ example [CompleteSpace X] (f : ℕ → Set X) (ho : ∀ n, IsOpen (f n)) (hd : �
   calc
     dist y x ≤ r 0 := yball 0
     _ ≤ ε := min_le_left _ _
-
-
