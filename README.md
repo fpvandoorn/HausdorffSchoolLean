@@ -41,8 +41,6 @@ If you have trouble installing Lean, you can use Lean directly in your browser u
 
 * Make sure the Machine type is `4-core`, and then press `Create codespace`
 
-![Choose 4-core](images/codespaces3.png)
-
 ## To use this repository with Gitpod
 
 Gitpod is an alternative to codespaces that is slightly inconvenient, since it requires you to verify your phone number.
