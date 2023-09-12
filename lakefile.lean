@@ -10,11 +10,11 @@ def moreServerArgs := #[
 -- These settings only apply during `lake build`, but not in VSCode editor.
 def moreLeanArgs := moreServerArgs
 
-package mil where
+package HausdorffSchool where
   moreServerArgs := moreServerArgs
 
 @[default_target]
-lean_lib MIL where
+lean_lib HausdorffSchool where
   moreLeanArgs := moreLeanArgs
 
 require mathlib from git "https://github.com/leanprover-community/mathlib4"@"master"
