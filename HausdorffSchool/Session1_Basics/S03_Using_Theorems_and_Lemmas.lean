@@ -1,6 +1,18 @@
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
 import HausdorffSchool.Common
 
+/-
+Remark: for these and future exercises, it is good to read it side-by-side with the digital book
+"Mathematics in Lean". These exercises are part of chapter 2, section 3.
+
+You can open it in your browser here:
+https://avigad.github.io/mathematics_in_lean/C02_Basics.html#using-theorems-and-lemmas
+
+You can also open it in a tab of this editor:
+press ctrl+shift+P (cmd+shift+P on Mac), type "Lean 4: Open documentation view" and click on
+"Mathematics in Lean".
+-/
+
 variable (a b c d e : ℝ)
 open Real
 
