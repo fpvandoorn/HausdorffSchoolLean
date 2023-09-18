@@ -11,7 +11,7 @@ open Real
 
 #check 2
 #check 17 + 4
-#check π
+#check π -- type using \pi
 #check rexp 2
 
 /- Every expression has a unique type -/
@@ -31,6 +31,10 @@ open Real
 /- We can also make our own expressions, and give them names -/
 def myFavouriteNumber : ℕ := 37
 
+
+
+
+
 /- # Prop -/
 
 /- The type `Prop` contains all statements
@@ -47,9 +51,18 @@ Unfortunate clash in terminology:
 #check 2 + 2 = 5
 #check Irrational (rexp 1 + π)
 
-def MyDifficultStatement : Prop := ∀ n : ℕ, ∃ p, n ≤ p ∧ Prime p ∧ Prime (p + 2)
-def MyEasyFalseStatement : Prop := ∀ n : ℕ, ∃ p, n ≤ p ∧ Prime p ∧ Prime (p + 2) ∧ Prime (p + 4)
-def MyVeryEasyTrueStatement : Prop := ∀ n : ℕ, ∃ p, n ≤ p
+def MyDifficultStatement : Prop :=
+  ∀ n : ℕ, ∃ p, n ≤ p ∧ Prime p ∧ Prime (p + 2)
+
+def MyEasyFalseStatement : Prop :=
+  ∀ n : ℕ, ∃ p, n ≤ p ∧ Prime p ∧ Prime (p + 2) ∧ Prime (p + 4)
+
+def MyVeryEasyTrueStatement : Prop :=
+  ∀ n : ℕ, ∃ p, n ≤ p
+
+
+
+
 
 /- If `p : Prop`, an expression of type `p` is a proof of `p`. -/
 
@@ -60,13 +73,13 @@ example : 2 + 2 ≠ 5 := by simp
 
 /- # Rewriting
 
-Rewriting is a tactic that changes a part of a goal to something equal to it.
+`rw` (short for "rewrite") is a tactic that changes a part of a goal to something equal to it.
 
-Here the commutator of two elements of a group is defined as
+In the following lemma the commutator of two elements of a group is defined as
 `⁅g, h⁆ =g * h * g ⁻¹ * h ⁻¹`
 -/
 
-variable (G : Type) [Group G] (g h : G)
+variable {G : Type} [Group G] (g h : G)
 
 #check commutatorElement_def g h
 #check mul_inv_rev g h
@@ -75,19 +88,24 @@ lemma inverse_of_a_commutator : ⁅g, h⁆⁻¹ = ⁅h, g⁆ := by sorry
 
 /-
 Variants of `rw`:
+* `rw [lemma1, lemma2, ...]` is short for multiple rewrites in a row
 * `rw [← my_lemma]` to rewrite `my_lemma` from right to left
 * `rw [my_lemma] at h` to rewrite using `my_lemma` at `h`.
 You have to know what lemma you need to rewrite with. `rw?` suggests possible rewrites
 -/
+
+example (a b c d : ℝ) (h : c = a*d - 1) (h' : b = a*d) : c = b - 1 := by
+  rw [← h'] at h
+  exact h -- `rw [h]` also works
 
 
 /-
 # Calculational proofs using `calc`
 -/
 
-example (a b c d : ℝ) (h : c = b*a - d) (h' : d = a*b) : c = 0 := by
-  calc
-    c = b*a - d   := by rw [h]
+example (a b c d : ℝ) (h : a + c = b*a - d) (h' : d = a*b) : a + c = 0 := by
+  calc a + c
+      = b*a - d   := by rw [h]
     _ = b*a - a*b := by rw [h']
     _ = 0         := by ring
 
@@ -98,16 +116,18 @@ example (a b c d : ℝ) (h : c = b*a - d) (h' : d = a*b) : c = 0 := by
 
 
 
-/- There are more advanced tactics that will do some simple reasoning.
+/- There are more advanced tactics that will do particular kinds of calculations.
 * `ring`: prove equalities in commutative rings
 * `linarith`: prove linear (in)equalities -/
 
-example (R : Type) [CommRing R] (a b : R) :
-    (a - b) * (a + b) = a ^ 2 - b ^ 2 := by ring
-
+variable {R : Type} [CommRing R] (a b : R)
+example : (a - b) * (a + b) = a ^ 2 - b ^ 2 := by ring
 
 example (a b c : ℝ) (h1 : 2 * a ≤ 3 * b) (h2 : 1 ≤ a) (h3 : c = 2) :
     c + a ≤ 5 * b := by linarith
+
+
+
 
 /-
 **Backwards reasoning** is where we chain implications backwards, deducing
@@ -118,7 +138,7 @@ lemma simple_proof (p q r : Prop) (h1 : p → q) (h2 : q → r) : p → r := by 
 
 
 
-#print simple_proof
+-- #print simple_proof
 
 
 
@@ -126,8 +146,7 @@ lemma simple_proof (p q r : Prop) (h1 : p → q) (h2 : q → r) : p → r := by 
 
 example : Continuous (fun x ↦ 2 + x * rexp x) := by sorry
 
-/- `apply?` -/
-
+/- `apply?` can give suggestions what lemmas you could apply. -/
 
 
 /-
@@ -138,6 +157,22 @@ example : Continuous (fun x ↦ 2 + x * rexp x) := by sorry
 
 
 
-/- ## Lemma naming
+
+/- In the following lemma, notice that `a`, `b`, `c`
+  are inside curly braces `{...}`.
+  This means that these arguments are *implicit*:
+  they don't have to be stated, but will be figured out by Lean automatically. -/
+
+lemma my_lemma {a b c : ℝ} (h : a + b = a + c) : b = c :=
+    add_left_cancel h
+
+example {b c : ℝ} (h : 2 + b = 2 + c) : b = c := sorry -- prove using `my_lemma`
+
+
+
+
+
+
+/- # Lemma naming
 https://leanprover-community.github.io/contribute/naming.html
 -/

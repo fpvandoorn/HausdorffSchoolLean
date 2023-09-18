@@ -30,9 +30,13 @@ Do the following:
   `HausdorffSchoolLean` (*not* one of its subfolders).
 
 * Test that everything is working by opening `HausdorffSchool/Test.lean`.
-  It is normal if it takes 10-40 seconds for Lean to start up
+  It is normal if it takes 10-40 seconds for Lean to start up.
 
-* More files will be added to this repository during the tutorial.
+* More files will be added to this repository during the tutorial. The first exercises are in `HausdorffSchool/Session1_Basics/01Calculating.lean`.
+
+## Get new exercises
+
+If you have already followed the steps above, and want to get the latest exercises, open a terminal in your local copy of this repository (e.g. `cd HausdorffSchoolLean`) and then run `git pull`. This gives you the new exercises.
 
 ## Setting up Codespaces
 
@@ -40,7 +44,8 @@ If you have trouble installing Lean, you can use Lean directly in your browser u
 
 <a href='https://codespaces.new/fpvandoorn/HausdorffSchoolLean' target="_blank" rel="noreferrer noopener"><img src='https://github.com/codespaces/badge.svg' alt='Open in GitHub Codespaces' style='max-width: 100%;'></a>
 
-* Make sure the Machine type is `4-core`, and then press `Create codespace` (this might take a few minutes).
+* Make sure the Machine type is `4-core`, and then press `Create codespace`
+* After 1-2 minutes you see a VSCode window in your browser. However, it is still busily downloading mathlib in the background, so give it another few minutes (5 to be safe) and then open a `.lean` file to start.
 
 ## To use this repository with Gitpod
 
