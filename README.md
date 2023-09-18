@@ -18,6 +18,7 @@ Do the following:
 * Run `cd HausdorffSchoolLean`
 
 * Run `lake exe cache get`
+  * On Windows, if you get an error that starts with `curl: (35) schannel: next InitializeSecurityContext failed` it is probably your antivirus program that doesn't like that we're downloading many files. The easiest solution is to temporarily disable your antivirus program.
 
 * Launch VS Code, either through your application menu or by typing
   `code .`. (MacOS users need to take a one-off
