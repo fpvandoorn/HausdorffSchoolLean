@@ -4,6 +4,15 @@ import Mathlib.Tactic
 
 set_option warningAsError false
 
+section
+open Lean Parser Tactic
+
+macro (name := ring_at) "ring" cfg:config ? loc:location : tactic =>
+  `(tactic| ring_nf $cfg ? $loc)
+
+end
+
+
 namespace PiNotation
 open Lean.Parser Term
 open Lean.PrettyPrinter.Delaborator
