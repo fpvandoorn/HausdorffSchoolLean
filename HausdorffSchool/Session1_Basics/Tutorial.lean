@@ -14,6 +14,8 @@ open Real
 #check π -- type using \pi
 #check rexp 2
 
+#check fun (x : ℝ) ↦ x ^ 2
+
 /- Every expression has a unique type -/
 
 #check 2
@@ -22,6 +24,14 @@ open Real
 #check (2 : ℚ)
 #check (2 : ℝ)
 #check (2 : ℂ)
+
+
+
+/- Warning: division on `ℕ` is division rounded down. -/
+
+#eval 6 / 4 -- ⌊ 6 / 4 ⌋
+#eval (6 : ℚ) / 4
+
 
 /- Types are expressions too! -/
 
@@ -48,6 +58,7 @@ Unfortunate clash in terminology:
 
 #check 2 + 2 = 4
 #check rexp 1 < π
+
 #check 2 + 2 = 5
 #check Irrational (rexp 1 + π)
 
@@ -70,6 +81,8 @@ def MyVeryEasyTrueStatement : Prop :=
 example : 4 = 4 := by rfl
 example : 2 + 2 = 4 := by rfl
 example : 2 + 2 ≠ 5 := by simp
+-- example : (3 : ℕ) ≠ fun (x : ℝ) ↦ x ^ 2 := sorry
+
 
 /- # Rewriting
 
@@ -136,10 +149,8 @@ what we want to prove from a combination of other statements (potentially even s
 
 lemma simple_proof (p q r : Prop) (h1 : p → q) (h2 : q → r) : p → r := by sorry
 
-
-
 -- #print simple_proof
-
+-- #explode simple_proof
 
 
 /- We can prove the following manually, or using more advanced tactics. -/
