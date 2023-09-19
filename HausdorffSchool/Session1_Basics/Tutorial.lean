@@ -6,12 +6,12 @@ open Real
 
 /- Lean can compute -/
 #eval 2 ^ 3 + 4 * 5 - 6
+#eval 2 + 3
 
 /- In Lean, every expression has a type, and `#check` can tell you the type -/
-
 #check 2
 #check 17 + 4
-#check π -- type using \pi
+#check π  -- type using \pi
 #check rexp 2
 
 #check fun (x : ℝ) ↦ x ^ 2
@@ -30,8 +30,7 @@ open Real
 /- Warning: division on `ℕ` is division rounded down. -/
 
 #eval 6 / 4 -- ⌊ 6 / 4 ⌋
-#eval (6 : ℚ) / 4
-
+#eval (6 / 4 : ℚ)
 
 /- Types are expressions too! -/
 
@@ -40,9 +39,10 @@ open Real
 
 /- We can also make our own expressions, and give them names -/
 def myFavouriteNumber : ℕ := 37
+def squaring (x : ℤ) : ℤ := x ^ 2
 
-
-
+#eval squaring (-5)
+#check squaring
 
 
 /- # Prop -/
@@ -78,10 +78,16 @@ def MyVeryEasyTrueStatement : Prop :=
 /- If `p : Prop`, an expression of type `p` is a proof of `p`. -/
 
 #check Eq.refl 4
+
+
 example : 4 = 4 := by rfl
-example : 2 + 2 = 4 := by rfl
+#eval 2 + 2
+example : (2 + 2 : ℝ) = 1.0 + 3 := by norm_num
 example : 2 + 2 ≠ 5 := by simp
 -- example : (3 : ℕ) ≠ fun (x : ℝ) ↦ x ^ 2 := sorry
+example : (2 : ℕ) = (2 : ℝ) := by norm_num
+-- example : 9.99999... = 1
+example : ¬ 1 ∈ ({2} : Set ℕ) := by sorry
 
 
 /- # Rewriting
@@ -92,12 +98,23 @@ In the following lemma the commutator of two elements of a group is defined as
 `⁅g, h⁆ =g * h * g ⁻¹ * h ⁻¹`
 -/
 
-variable {G : Type} [Group G] (g h : G)
+section
+variable {G : Type} [Group G] (g h h' h'' : G)
 
 #check commutatorElement_def g h
 #check mul_inv_rev g h
 
-lemma inverse_of_a_commutator : ⁅g, h⁆⁻¹ = ⁅h, g⁆ := by sorry
+lemma inverse_of_a_commutator (hyp : h = h') (hyp2 : h' = h'') : ⁅g, h⁆⁻¹ = ⁅h', g⁆ := by 
+  rw [hyp]
+  rw [hyp2] at hyp
+  rw [commutatorElement_def]
+  rw [commutatorElement_def]
+  rw [mul_inv_rev]
+  rw [mul_inv_rev]
+  rw [mul_inv_rev]
+  rw [inv_inv]
+  rw [inv_inv]
+  rw [mul_assoc, mul_assoc]
 
 /-
 Variants of `rw`:
@@ -118,7 +135,7 @@ example (a b c d : ℝ) (h : c = a*d - 1) (h' : b = a*d) : c = b - 1 := by
 
 example (a b c d : ℝ) (h : a + c = b*a - d) (h' : d = a*b) : a + c = 0 := by
   calc a + c
-      = b*a - d   := by rw [h]
+      = b*a - d   := h
     _ = b*a - a*b := by rw [h']
     _ = 0         := by ring
 
@@ -139,6 +156,7 @@ example : (a - b) * (a + b) = a ^ 2 - b ^ 2 := by ring
 example (a b c : ℝ) (h1 : 2 * a ≤ 3 * b) (h2 : 1 ≤ a) (h3 : c = 2) :
     c + a ≤ 5 * b := by linarith
 
+end
 
 
 
@@ -147,7 +165,12 @@ example (a b c : ℝ) (h1 : 2 * a ≤ 3 * b) (h2 : 1 ≤ a) (h3 : c = 2) :
 what we want to prove from a combination of other statements (potentially even stronger ones).
 -/
 
-lemma simple_proof (p q r : Prop) (h1 : p → q) (h2 : q → r) : p → r := by sorry
+lemma simple_proof (p : Prop) (q : Prop) (r : Prop) (h1 : p → q) (h2 : q → r) : p → r := by 
+  intro hp
+  apply h2
+  apply h1
+  exact hp
+
 
 -- #print simple_proof
 -- #explode simple_proof
@@ -155,7 +178,11 @@ lemma simple_proof (p q r : Prop) (h1 : p → q) (h2 : q → r) : p → r := by 
 
 /- We can prove the following manually, or using more advanced tactics. -/
 
-example : Continuous (fun x ↦ 2 + x * rexp x) := by sorry
+example : Continuous (fun (x : ℝ) ↦ 2 + x * rexp x) := by 
+  apply Continuous.add
+  exact continuous_const
+  sorry
+
 
 /- `apply?` can give suggestions what lemmas you could apply. -/
 
@@ -177,7 +204,8 @@ example : Continuous (fun x ↦ 2 + x * rexp x) := by sorry
 lemma my_lemma {a b c : ℝ} (h : a + b = a + c) : b = c :=
     add_left_cancel h
 
-example {b c : ℝ} (h : 2 + b = 2 + c) : b = c := sorry -- prove using `my_lemma`
+example {b c : ℝ} (h : 2 + b = 2 + c) : b = c := 
+  my_lemma h
 
 
 
