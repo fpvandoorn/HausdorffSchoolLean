@@ -16,7 +16,7 @@ section
 
 /-! ### Implications
 
-\to ~~> → 
+\to ~~> →
 
 When in goal: `intro`/`intros`
 When in hypothesis: `have` or `specialize`
@@ -50,7 +50,7 @@ example (p q r : Prop) : (p → q) → ((p → (q → r)) → (p → r)) := by {
 Same tactics as implications.
 -/
 
-example (α : Type) (p q : α → Prop) (h : ∀ x, p x → q x) :  
+example (α : Type) (p q : α → Prop) (h : ∀ x, p x → q x) :
     (∀ x, p x) → ∀ x', q x' := by {
   intro hp
   intro x'
@@ -82,7 +82,7 @@ example (f : ℕ → ℕ)
     ∀ m, ∃ n, m ≤ 2 * f n := by {
   intro m
   specialize hf m
-  obtain ⟨n, hmf⟩ := hf  
+  obtain ⟨n, hmf⟩ := hf
   use n
   linarith
 }
@@ -96,7 +96,6 @@ When in hypothesis: `obtain`
 
 If `h : p ∧ q` then `h.1 : p` and `h.2 : q`
 -/
-
 example (p q : Prop) : p → q → p ∧ q := by {
   intro hp hq
   constructor
@@ -106,13 +105,13 @@ example (p q : Prop) : p → q → p ∧ q := by {
 
 example (p q : Prop) : p ∧ q → q ∧ p := by {
   intro hpq
-  obtain ⟨hp, hq⟩ := hpq 
+  obtain ⟨hp, hq⟩ := hpq
   use hq, hp
 }
 
 /-! ### Disjunctions
 
-\or ~~> ∨  
+\or ~~> ∨
 
 When in goal: `left`/`right`
 When in hypothesis: `obtain`
@@ -126,7 +125,7 @@ example (p q : Prop) : p → p ∨ q := by {
 
 example (p q : Prop) : p ∨ q → q ∨ p := by {
   intro hpq
-  obtain (hp | hq) := hpq
+  obtain hp | hq := hpq
   · right
     exact hp
   · left
@@ -157,7 +156,7 @@ example (p q : Prop) : (p ↔ q) ↔ (p → q) ∧ (q → p) := by {
 
 /-! ### Negation
 
-\not ~~> ¬  
+\not ~~> ¬
 
 When in goal: `intro`
 When in hypothesis: `apply` (if goal is `False`), `have`

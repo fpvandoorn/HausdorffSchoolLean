@@ -36,7 +36,7 @@ When we prove that two limits compose: if
 `f x` tends to `y₀` when `x` tends to `x₀` and
 `g y` tends to `z₀` when `y` tends to `y₀` then
 `(g ∘ f) x` tends to `z₀` when `x` tends to `x₀`.
-This lemma has 512 variants.
+This lemma has at least 512 variants.
 
 Obviously we don't want to prove this 512 times.
 Solution: use filters.
@@ -80,7 +80,7 @@ Examples of filters:
 
 /- `(atTop : Filter ℕ)` is made of sets of `ℕ` containing
 `{n | n ≥ N}` for some `N` -/
-#check (atTop : Filter ℕ)
+#check (atTop : Filter ℝ)
 
 /- `𝓝 x`, made of neighborhoods of `x` in a topological space -/
 #check (𝓝 3 : Filter ℝ)
@@ -180,10 +180,12 @@ example (P Q : ℕ → Prop)
     (hP : ∀ᶠ n in atTop, P n)
     (hQ : ∀ᶠ n in atTop, Q n) :
     ∀ᶠ n in atTop, P n ∧ Q n :=
-  hP.and hQ
+  Filter.Eventually.and hP hQ
 
-
-
+open Filter
+#check Filter.Eventually.and
+#check Iff.mp
+#check Iff.mpr
 
 
 
@@ -227,9 +229,8 @@ example {x : X} {s : Set X} :
 
 example {x : X} {s : Set X} (h : s ∈ 𝓝 x) : x ∈ s := by
   rw [mem_nhds_iff] at h
-  rcases h with ⟨t, hts, ht, hxt⟩
+  obtain ⟨t, hts, ht, hxt⟩ := h
   exact hts hxt
-
 
 
 
@@ -282,7 +283,7 @@ This can also be reformulated using filters.
 example (F : Filter X) : NeBot F ↔ F ≠ ⊥ := by
   exact?
 
-example (F : Filter X) :
+example (F : Filter X) (x : X) :
     ClusterPt x F ↔ NeBot (𝓝 x ⊓ F) := by
   rfl
 
@@ -319,7 +320,7 @@ variable {X Y : Type _} [MetricSpace X] [MetricSpace Y]
 
 /- In metric spaces, all topological notions are also
 characterized by the distance function. -/
-
+-- #where
 example (f : X → Y) (x₀ : X) : ContinuousAt f x₀ ↔
     ∀ ε > 0, ∃ δ > 0, ∀ {x},
     dist x x₀ < δ → dist (f x) (f x₀) < ε :=
