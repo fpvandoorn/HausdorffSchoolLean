@@ -13,7 +13,7 @@ example (x : ℝ) :
   sorry
 }
 
-example (x : ℝ) : 
+example (x : ℝ) :
     deriv (fun x : ℝ ↦ (x + 1) * (x + 2)) x = 2 * x + 3 := by {
   sorry
 }

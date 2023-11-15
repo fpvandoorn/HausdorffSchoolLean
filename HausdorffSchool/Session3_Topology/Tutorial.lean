@@ -141,7 +141,7 @@ def Tendsto {X Y : Type _} (f : X → Y)
     (F : Filter X) (G : Filter Y) :=
   map f F ≤ G
 
-def Tendsto_iff {X Y : Type _} (f : X → Y)
+lemma Tendsto_iff {X Y : Type _} (f : X → Y)
     (F : Filter X) (G : Filter Y) :
     Tendsto f F G ↔ ∀ S : Set Y, S ∈ G → f ⁻¹' S ∈ F := by
   rfl

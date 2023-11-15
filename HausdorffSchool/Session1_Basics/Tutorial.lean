@@ -63,13 +63,13 @@ Unfortunate clash in terminology:
 #check Irrational (rexp 1 + π)
 
 def MyDifficultStatement : Prop :=
-  ∀ n : ℕ, ∃ p, n ≤ p ∧ Prime p ∧ Prime (p + 2)
+  ∀ n : ℕ, ∃ p ≥ n, Prime p ∧ Prime (p + 2)
 
 def MyEasyFalseStatement : Prop :=
-  ∀ n : ℕ, ∃ p, n ≤ p ∧ Prime p ∧ Prime (p + 2) ∧ Prime (p + 4)
+  ∀ n : ℕ, ∃ p ≥ n, Prime p ∧ Prime (p + 2) ∧ Prime (p + 4)
 
 def MyVeryEasyTrueStatement : Prop :=
-  ∀ n : ℕ, ∃ p, n ≤ p
+  ∀ n : ℕ, ∃ p, p ≥ n
 
 
 
